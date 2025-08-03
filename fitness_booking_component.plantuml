@@ -1,0 +1,52 @@
+@startuml ComponentDiagram_FitnessBooking
+
+title Компонентная диаграмма - Система бронирования тренировок
+
+skinparam component {
+    BackgroundColor #E8F4FD
+    BorderColor #2E5A87
+    FontSize 12
+}
+
+package "Frontend" {
+    component "Мобильное приложение" as mobile_app
+    component "Веб-интерфейс" as web_ui
+}
+
+package "API Layer" {
+    component "API Gateway" as api_gateway
+}
+
+package "Business Logic" {
+    component "Сервис бронирования" as booking_service
+    component "Сервис расписания" as schedule_service
+    component "Сервис уведомлений" as notification_service
+    component "Сервис отчетов" as report_service
+}
+
+package "Data Layer" {
+    database "База данных бронирований" as booking_db
+    database "База данных расписания" as schedule_db
+}
+
+package "External Systems" {
+    component "Платежный шлюз" as payment_gateway
+    component "Email сервис" as email_service
+    component "PDF Generator" as pdf_generator
+}
+
+mobile_app --> api_gateway : HTTP/REST
+web_ui --> api_gateway : HTTP/REST
+api_gateway --> booking_service
+api_gateway --> schedule_service
+booking_service --> booking_db : CRUD
+schedule_service --> schedule_db : CRUD
+booking_service --> notification_service : События
+booking_service --> report_service : Данные для отчетов
+notification_service --> email_service : SMTP
+booking_service --> payment_gateway : API
+report_service --> pdf_generator : Генерация PDF
+report_service --> booking_service : Запрос данных
+report_service --> schedule_service : Запрос данных
+
+@enduml
