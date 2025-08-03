@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фитнес-приложение - Экспорт отчета</title>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            --background-color: #f5f7fa;
+            --text-color: #333;
+            --border-color: #e9ecef;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .app-container {
+            max-width: 414px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .report-period {
+            margin-bottom: 24px;
+        }
+        
+        .date-picker {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        
+        .date-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        .btn-export {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .report-preview {
+            border: 1px dashed var(--border-color);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            min-height: 200px;
+        }
+        
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>Экспорт отчета</h1>
+        </header>
+        
+        <main class="content">
+            <div class="report-period">
+                <h3>Выберите период</h3>
+                <div class="date-picker">
+                    <input type="date" class="date-input" id="start-date">
+                    <input type="date" class="date-input" id="end-date">
+                </div>
+            </div>
+            
+            <button class="btn-export" onclick="generateReport()">Сформировать отчет</button>
+            
+            <div class="report-preview" id="report-preview">
+                <h3>Предпросмотр отчета</h3>
+                <div class="stats-item">
+                    <span>Всего посещений:</span>
+                    <strong>12</strong>
+                </div>
+                <div class="stats-item">
+                    <span>Средняя продолжительность:</span>
+                    <strong>45 мин</strong>
+                </div>
+                <div class="stats-item">
+                    <span>Любимый тренер:</span>
+                    <strong>Иванова А.</strong>
+                </div>
+            </div>
+            
+            <button class="btn-export" id="download-btn" disabled>Скачать PDF</button>
+        </main>
+    </div>
+    
+    <script>
+        function generateReport() {
+            // Имитация генерации отчета
+            document.getElementById('download-btn').disabled = false;
+            document.getElementById('report-preview').style.borderColor = "#4CAF50";
+        }
+    </script>
+</body>
+</html>
